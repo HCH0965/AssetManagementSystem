@@ -10,16 +10,10 @@
     <result column="authority" jdbcType="BIGINT" property="authority" />
     <result column="department" jdbcType="VARCHAR" property="department" />
     <result column="position" jdbcType="VARCHAR" property="position" />
-    <result column="E-mail" jdbcType="VARCHAR" property="eMail" />
-    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
-    <result column="age" jdbcType="BIGINT" property="age" />
-    <result column="enter_time" jdbcType="TIMESTAMP" property="enterTime" />
-    <result column="work_years" jdbcType="BIGINT" property="workYears" />
     <result column="timestamp" jdbcType="TIMESTAMP" property="timestamp" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, username, password, role, authority, department, position, E-mail, telephone, 
-    age, enter_time, work_years, timestamp
+    id, user_id, username, password, role, authority, department, position, timestamp
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -37,14 +31,10 @@
     </selectKey>
     insert into user (user_id, username, password, 
       role, authority, department, 
-      position, E-mail, telephone, 
-      age, enter_time, work_years, 
-      timestamp)
+      position, timestamp)
     values (#{userId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{role,jdbcType=BIGINT}, #{authority,jdbcType=BIGINT}, #{department,jdbcType=VARCHAR}, 
-      #{position,jdbcType=VARCHAR}, #{eMail,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
-      #{age,jdbcType=BIGINT}, #{enterTime,jdbcType=TIMESTAMP}, #{workYears,jdbcType=BIGINT}, 
-      #{timestamp,jdbcType=TIMESTAMP})
+      #{position,jdbcType=VARCHAR}, #{timestamp,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.hch.model.entity.User">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -73,21 +63,6 @@
       <if test="position != null">
         position,
       </if>
-      <if test="eMail != null">
-        E-mail,
-      </if>
-      <if test="telephone != null">
-        telephone,
-      </if>
-      <if test="age != null">
-        age,
-      </if>
-      <if test="enterTime != null">
-        enter_time,
-      </if>
-      <if test="workYears != null">
-        work_years,
-      </if>
       <if test="timestamp != null">
         timestamp,
       </if>
@@ -113,21 +88,6 @@
       </if>
       <if test="position != null">
         #{position,jdbcType=VARCHAR},
-      </if>
-      <if test="eMail != null">
-        #{eMail,jdbcType=VARCHAR},
-      </if>
-      <if test="telephone != null">
-        #{telephone,jdbcType=VARCHAR},
-      </if>
-      <if test="age != null">
-        #{age,jdbcType=BIGINT},
-      </if>
-      <if test="enterTime != null">
-        #{enterTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="workYears != null">
-        #{workYears,jdbcType=BIGINT},
       </if>
       <if test="timestamp != null">
         #{timestamp,jdbcType=TIMESTAMP},
@@ -158,21 +118,6 @@
       <if test="position != null">
         position = #{position,jdbcType=VARCHAR},
       </if>
-      <if test="eMail != null">
-        E-mail = #{eMail,jdbcType=VARCHAR},
-      </if>
-      <if test="telephone != null">
-        telephone = #{telephone,jdbcType=VARCHAR},
-      </if>
-      <if test="age != null">
-        age = #{age,jdbcType=BIGINT},
-      </if>
-      <if test="enterTime != null">
-        enter_time = #{enterTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="workYears != null">
-        work_years = #{workYears,jdbcType=BIGINT},
-      </if>
       <if test="timestamp != null">
         timestamp = #{timestamp,jdbcType=TIMESTAMP},
       </if>
@@ -188,11 +133,6 @@
       authority = #{authority,jdbcType=BIGINT},
       department = #{department,jdbcType=VARCHAR},
       position = #{position,jdbcType=VARCHAR},
-      E-mail = #{eMail,jdbcType=VARCHAR},
-      telephone = #{telephone,jdbcType=VARCHAR},
-      age = #{age,jdbcType=BIGINT},
-      enter_time = #{enterTime,jdbcType=TIMESTAMP},
-      work_years = #{workYears,jdbcType=BIGINT},
       timestamp = #{timestamp,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

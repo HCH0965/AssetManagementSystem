@@ -10,8 +10,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@ApiModel(value = "")
-@TableName(value = "")
+@ApiModel(value = "use")
+@TableName(value = "use")
 public class Use implements Serializable {
     /**
      * 自增ID

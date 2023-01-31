@@ -10,8 +10,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@ApiModel(value = "")
-@TableName(value = "")
+@ApiModel(value = "user")
+@TableName(value = "user")
 public class User implements Serializable {
     /**
      * 自增ID
@@ -68,41 +68,4 @@ public class User implements Serializable {
     @TableField(value = "")
     @ApiModelProperty(value = "")
     private String position;
-
-    /**
-     *
-     */
-    @TableField(value = "")
-    @ApiModelProperty(value = "")
-    private String eMail;
-
-    /**
-     *
-     */
-    @TableField(value = "")
-    @ApiModelProperty(value = "")
-    private String telephone;
-
-    /**
-     *
-     */
-    @TableField(value = "")
-    @ApiModelProperty(value = "")
-    private Integer age;
-
-    /**
-     *
-     */
-    @TableField(value = "",fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date enterTime;
-
-    /**
-     *
-     */
-    @TableField(value = "")
-    @ApiModelProperty(value = "")
-    private Integer workYears;
-
 }

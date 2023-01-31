@@ -9,11 +9,10 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @Data
-@ApiModel(value = "")
-@TableName(value = "")
+@ApiModel(value = "asset")
+@TableName(value = "asset")
 public class Asset implements Serializable {
     /**
      * 自增ID
