@@ -21,61 +21,60 @@ public class Scrap implements Serializable {
     private Integer id;
 
     /**
-     *
+     * 资产编号
      */
-    @TableField(value = "")
-    @ApiModelProperty(value = "")
+    @TableField(value = "asset_id")
+    @ApiModelProperty(value = "资产编号")
     private String assetId;
 
     /**
-     *
+     * 资产数量
      */
-    @TableField(value = "")
-    @ApiModelProperty(value = "")
+    @TableField(value = "number")
+    @ApiModelProperty(value = "资产数量")
     private Integer number;
 
     /**
-     *
+     * 申请人
      */
-    @TableField(value = "")
-    @ApiModelProperty(value = "")
+    @TableField(value = "applicant")
+    @ApiModelProperty(value = "申请人")
     private String applicant;
 
     /**
-     *
+     * 申请时间
      */
-    @TableField(value = "",fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @TableField(value = "apply_time")
+    @ApiModelProperty(value = "申请时间")
     private Date applyTime;
 
     /**
-     *
+     * 资产状态（0: 已申请 1:已通过）
      */
-    @TableField(value = "")
-    @ApiModelProperty(value = "")
+    @TableField(value = "state")
+    @ApiModelProperty(value = "资产状态")
     private Integer state;
 
     /**
-     *
+     * 同意人
      */
-    @TableField(value = "")
-    @ApiModelProperty(value = "")
+    @TableField(value = "consenter")
+    @ApiModelProperty(value = "同意人")
     private String consenter;
 
     /**
-     *
+     * 同意时间
      */
-    @TableField(value = "",fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "")
+    @TableField(value = "agreed_time",fill = FieldFill.INSERT)
+    @ApiModelProperty(value = "同意时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date agreedTime;
 
     /**
-     *
+     * 时间戳
      */
-    @TableField(value = "",fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "")
+    @TableField(value = "scrap_time",fill = FieldFill.INSERT)
+    @ApiModelProperty(value = "时间戳")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date scrapTime;
 
