@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+</head>
+<body>
+<form method="post" th:action="@{/asset/userLogin}" th:object="${userLoginDTO}">
+    <div class="login">
+        <p style="color: pink; font-size: 20px;">创新创业基地固定资产管理系统</p>
+        <input class="userId" th:field="*{userId}" id="userId" placeholder="请输入用户名" type="text"/>
+        <input class="password" th:field="*{password}" id="password" placeholder="请输入密码" type="password"/>
+        <input id="login" onclick="login()" type="submit" value="登录"/>
+    </div>
+</form>
+
+</body>
+</html>

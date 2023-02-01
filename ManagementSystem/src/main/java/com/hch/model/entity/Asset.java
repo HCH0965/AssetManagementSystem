@@ -36,7 +36,7 @@ public class Asset implements Serializable {
     private String assetName;
 
     /**
-     * 资产状态（0: 未使用 1:在使用 2: 已报废）
+     * 资产状态（0:未使用 1:在使用 2:已报废）
      */
     @TableField(value = "state")
     @ApiModelProperty(value = "资产状态")

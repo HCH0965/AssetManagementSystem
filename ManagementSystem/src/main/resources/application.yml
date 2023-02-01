@@ -14,3 +14,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: Blander034
+  thymeleaf:
+    mode: HTML5
+    encoding: UTF-8
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
