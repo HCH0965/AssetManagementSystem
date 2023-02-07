@@ -24,11 +24,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      */
     @Override
     public R<?> userLogin(UserLoginDTO userLoginDTO) {
-        List<User> userList = userService.lambdaQuery()
+        User loginCheck = userService.lambdaQuery()
                 .eq(User::getUserId, userLoginDTO.getUserId())
-                .eq(User::getPassword, userLoginDTO.getPassword())
-                .list();
-        if (userList.size() != 1){
+                .one();
+        //用户不存在
+        if (loginCheck == null){
+            return R.Failed();
+        }
+        //密码错误
+        if (loginCheck.getPassword() != userLoginDTO.getPassword()){
             return R.Failed();
         }
         return R.Success();

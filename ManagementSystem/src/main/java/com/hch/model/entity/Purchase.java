@@ -28,6 +28,13 @@ public class Purchase implements Serializable {
     private String assetId;
 
     /**
+     * 资产名称
+     */
+    @TableField(value = "asset_name")
+    @ApiModelProperty(value = "资产名称")
+    private String assetName;
+
+    /**
      * 资产价格
      */
     @TableField(value = "price")

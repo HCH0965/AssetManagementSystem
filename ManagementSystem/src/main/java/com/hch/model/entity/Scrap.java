@@ -28,6 +28,13 @@ public class Scrap implements Serializable {
     private String assetId;
 
     /**
+     * 资产名称
+     */
+    @TableField(value = "asset_name")
+    @ApiModelProperty(value = "资产名称")
+    private String assetName;
+
+    /**
      * 资产数量
      */
     @TableField(value = "number")
