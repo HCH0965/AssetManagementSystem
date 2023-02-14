@@ -6,6 +6,7 @@ import com.hch.model.dto.UserLoginDTO;
 import com.hch.model.entity.Asset;
 import com.hch.service.AssetService;
 import com.hch.service.PurchaseService;
+import com.hch.service.ScrapService;
 import com.hch.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class SystemController {
     @Autowired
     private PurchaseService purchaseService;
 
+    @Autowired
+    private ScrapService scrapService;
+
     @ApiOperation(value = "登录界面")
     @RequestMapping("/loginPage")
     public String loginPage(Model model) {
@@ -51,7 +55,7 @@ public class SystemController {
     @ApiOperation(value = "首页")
     @PostMapping("/homePage")
     public String homePage(Model model) {
-        List<Asset> assetList = assetService.showNOScrapAsset();
+        List<Asset> assetList = assetService.showNotScrapAsset();
         //向页面传值
         model.addAttribute("assetList", assetList);
         return "homePage/HomePage";
@@ -65,5 +69,11 @@ public class SystemController {
             return homePage(null);
         }
         return "Wrong";
+    }
+
+    @ApiOperation(value = "报废申请")
+    @PostMapping("/scrap")
+    public R<?> scrap(ApplyDTO applyDTO){
+        return scrapService.scrap(applyDTO);
     }
 }

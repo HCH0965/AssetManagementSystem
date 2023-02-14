@@ -36,7 +36,7 @@ public class PurchaseServiceImpl extends ServiceImpl<PurchaseMapper, Purchase> i
     public R<?> purchase(ApplyDTO applyDTO) {
         if (applyDTO != null) {
             Purchase purchase = new Purchase();
-            BeanUtils.copyProperties(purchase, applyDTO);
+            BeanUtils.copyProperties(applyDTO, purchase);
             //设置申请时间
             purchase.setApplyTime(systemService.nowTime());
             //将数据写入purchase表
@@ -50,7 +50,7 @@ public class PurchaseServiceImpl extends ServiceImpl<PurchaseMapper, Purchase> i
                 //计算数量
                 int newNumber = applyDTO.getNumber() + assetCheck.getNumber();
                 //计算总价
-                String newTotalPrice = assetCheck.getTotalprice() + applyDTO.getTotalPrice();
+                String newTotalPrice = assetCheck.getTotalprice() + applyDTO.getTotalprice();
                 //更新表
                 LambdaUpdateWrapper<Asset> assetUpdate = new LambdaUpdateWrapper<>();
                 assetUpdate
@@ -60,7 +60,7 @@ public class PurchaseServiceImpl extends ServiceImpl<PurchaseMapper, Purchase> i
             }
             //资产不存在，将数据写入asset表
             Asset newAsset = new Asset();
-            BeanUtils.copyProperties(newAsset, purchase);
+            BeanUtils.copyProperties(purchase, newAsset);
             assetService.save(newAsset);
             return R.Success();
         }

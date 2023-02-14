@@ -10,6 +10,11 @@ public enum MyEnum {
     ASSET_STATE_NULL(3,"空值"),
 
     /**
+     * 资产数量
+     */
+    ASSE_NUMBER_NONE(0, "0"),
+
+    /**
      * 错误标识
      */
     ERROR(100500,"错误标识");

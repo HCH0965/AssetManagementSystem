@@ -67,10 +67,11 @@ public class AssetServiceImpl extends ServiceImpl<AssetMapper, Asset> implements
      * @return 资产清单
      */
     @Override
-    public List<Asset> showNOScrapAsset() {
-        List<Asset> noScrapAsset = assetService.lambdaQuery()
+    public List<Asset> showNotScrapAsset() {
+        List<Asset> notScrapAsset = assetService.lambdaQuery()
                 .ne(Asset::getState, MyEnum.ASSET_STATE_SCRAP.getCode())
+                .ne(Asset::getNumber, MyEnum.ASSE_NUMBER_NONE.getCode()) //数量不为0
                 .list();
-        return noScrapAsset;
+        return notScrapAsset;
     }
 }

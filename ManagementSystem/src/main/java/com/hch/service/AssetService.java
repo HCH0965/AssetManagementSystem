@@ -34,5 +34,5 @@ public interface AssetService extends IService<Asset> {
      * 查询报未废资产
      * @return 资产清单
      */
-    List<Asset> showNOScrapAsset();
+    List<Asset> showNotScrapAsset();
 }
