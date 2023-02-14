@@ -4,11 +4,12 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hch.common.R;
 import com.hch.mapper.PurchaseMapper;
-import com.hch.model.dto.PurchaseDTO;
+import com.hch.model.dto.ApplyDTO;
 import com.hch.model.entity.Asset;
 import com.hch.model.entity.Purchase;
 import com.hch.service.AssetService;
 import com.hch.service.PurchaseService;
+import com.hch.service.SystemService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,32 +23,34 @@ public class PurchaseServiceImpl extends ServiceImpl<PurchaseMapper, Purchase> i
     @Autowired
     private AssetService assetService;
 
+    @Autowired
+    private SystemService systemService;
+
     /**
      * 购买申请
-     * @param purchaseDTO 资产信息
+     * @param applyDTO 资产信息
      * @return 返回结果
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public R<?> purchase(PurchaseDTO purchaseDTO) {
-        if (purchaseDTO != null) {
+    public R<?> purchase(ApplyDTO applyDTO) {
+        if (applyDTO != null) {
             Purchase purchase = new Purchase();
-            BeanUtils.copyProperties(purchase, purchaseDTO);
-            //计算总价
-            String DTOtotalPrice = String.valueOf(Integer.parseInt(purchaseDTO.getPrice()) * purchaseDTO.getNumber());
-            purchase.setTotalprice(DTOtotalPrice);
+            BeanUtils.copyProperties(purchase, applyDTO);
+            //设置申请时间
+            purchase.setApplyTime(systemService.nowTime());
             //将数据写入purchase表
             purchaseService.save(purchase);
             //判断资产是否已经存在
             Asset assetCheck = assetService.lambdaQuery()
-                    .eq(Asset::getAssetName, purchaseDTO.getAssetName())
+                    .eq(Asset::getAssetName, applyDTO.getAssetName())
                     .one();
             //资产已存在，更新asset表
             if (assetCheck != null) {
                 //计算数量
-                int newNumber = purchaseDTO.getNumber() + assetCheck.getNumber();
+                int newNumber = applyDTO.getNumber() + assetCheck.getNumber();
                 //计算总价
-                String newTotalPrice = assetCheck.getTotalprice() + DTOtotalPrice;
+                String newTotalPrice = assetCheck.getTotalprice() + applyDTO.getTotalPrice();
                 //更新表
                 LambdaUpdateWrapper<Asset> assetUpdate = new LambdaUpdateWrapper<>();
                 assetUpdate

@@ -32,7 +32,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return R.Failed();
         }
         //密码错误
-        if (loginCheck.getPassword() != userLoginDTO.getPassword()){
+        if (!loginCheck.getPassword().equals(userLoginDTO.getPassword())){
             return R.Failed();
         }
         return R.Success();

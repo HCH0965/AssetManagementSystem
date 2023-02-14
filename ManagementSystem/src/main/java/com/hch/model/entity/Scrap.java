@@ -51,12 +51,13 @@ public class Scrap implements Serializable {
     /**
      * 申请时间
      */
-    @TableField(value = "apply_time")
+    @TableField(value = "apply_time",fill = FieldFill.INSERT)
     @ApiModelProperty(value = "申请时间")
-    private Date applyTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private String applyTime;
 
     /**
-     * 资产状态（0: 已申请 1:已通过）
+     * 资产状态（0:已申请 1:已通过）
      */
     @TableField(value = "state")
     @ApiModelProperty(value = "资产状态")
@@ -75,14 +76,14 @@ public class Scrap implements Serializable {
     @TableField(value = "agreed_time",fill = FieldFill.INSERT)
     @ApiModelProperty(value = "同意时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date agreedTime;
+    private String agreedTime;
 
     /**
-     * 时间戳
+     * 报废戳
      */
     @TableField(value = "scrap_time",fill = FieldFill.INSERT)
     @ApiModelProperty(value = "时间戳")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date scrapTime;
+    private String scrapTime;
 
 }

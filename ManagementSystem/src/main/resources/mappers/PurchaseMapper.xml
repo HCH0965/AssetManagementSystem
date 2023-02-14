@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.hch.model.entity.Purchase">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="asset_id" jdbcType="VARCHAR" property="assetId" />
+    <result column="asset_name" jdbcType="VARCHAR" property="assetName" />
     <result column="price" jdbcType="VARCHAR" property="price" />
     <result column="number" jdbcType="BIGINT" property="number" />
     <result column="totalprice" jdbcType="VARCHAR" property="totalprice" />
@@ -34,12 +35,12 @@
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into purchase (asset_id, price, number, 
+    insert into purchase (asset_id, asset_name, price, number,
       totalprice, applicant, apply_time, 
       state, department, consenter, 
       agreed_time, purchase_time, timestamp
       )
-    values (#{assetId,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{number,jdbcType=BIGINT}, 
+    values (#{assetId,jdbcType=VARCHAR}, #{assetName,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{number,jdbcType=BIGINT},
       #{totalprice,jdbcType=VARCHAR}, #{applicant,jdbcType=VARCHAR}, #{applyTime,jdbcType=TIMESTAMP}, 
       #{state,jdbcType=BIGINT}, #{department,jdbcType=VARCHAR}, #{consenter,jdbcType=VARCHAR}, 
       #{agreedTime,jdbcType=TIMESTAMP}, #{purchaseTime,jdbcType=TIMESTAMP}, #{timestamp,jdbcType=TIMESTAMP}

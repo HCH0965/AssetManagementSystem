@@ -51,9 +51,10 @@ public class Use implements Serializable {
     /**
      * 申请时间
      */
-    @TableField(value = "apply_time")
+    @TableField(value = "apply_time",fill = FieldFill.INSERT)
     @ApiModelProperty(value = "申请时间")
-    private Date applyTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private String applyTime;
 
     /**
      * 资产状态（0: 已申请 1:已通过）
@@ -75,7 +76,7 @@ public class Use implements Serializable {
     @TableField(value = "agreed_time",fill = FieldFill.INSERT)
     @ApiModelProperty(value = "同意时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date agreedTime;
+    private String agreedTime;
 
     /**
      * 使用时间
@@ -83,6 +84,6 @@ public class Use implements Serializable {
     @TableField(value = "use_time",fill = FieldFill.INSERT)
     @ApiModelProperty(value = "使用时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date useTime;
+    private String useTime;
 
 }

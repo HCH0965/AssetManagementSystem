@@ -65,9 +65,10 @@ public class Purchase implements Serializable {
     /**
      * 申请时间
      */
-    @TableField(value = "apply_time")
+    @TableField(value = "apply_time",fill = FieldFill.INSERT)
     @ApiModelProperty(value = "申请时间")
-    private Date applyTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private String applyTime;
 
     /**
      * 资产状态（0: 已申请 1:已通过）
@@ -96,7 +97,7 @@ public class Purchase implements Serializable {
     @TableField(value = "agreed_time",fill = FieldFill.INSERT)
     @ApiModelProperty(value = "同意时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date agreedTime;
+    private String agreedTime;
 
     /**
      * 购买时间
@@ -104,6 +105,13 @@ public class Purchase implements Serializable {
     @TableField(value = "purchase_time",fill = FieldFill.INSERT)
     @ApiModelProperty(value = "购买时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private Date purchaseTime;
+    private String purchaseTime;
 
+    /**
+     * 时间戳
+     */
+    @TableField(value = "purchase_time",fill = FieldFill.INSERT)
+    @ApiModelProperty(value = "时间戳")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private String timestamp;
 }
