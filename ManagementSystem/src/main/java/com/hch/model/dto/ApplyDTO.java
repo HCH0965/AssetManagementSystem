@@ -2,16 +2,14 @@ package com.hch.model.dto;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
-public class PurchaseDTO {
+public class ApplyDTO {
     private String assetId;
     private String assetName;
     private String price;
     private Integer number;
+    private String totalprice;
     private String applicant;
-    private Date applyTime;
     private Integer state;
     private String department;
 }
