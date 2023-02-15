@@ -69,5 +69,4 @@ public class Asset implements Serializable {
     @TableField(value = "department")
     @ApiModelProperty(value = "所属部门")
     private String department;
-
 }

@@ -10,9 +10,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@ApiModel(value = "scrap")
-@TableName(value = "scrap")
-public class Scrap implements Serializable {
+@ApiModel(value = "scrap_apply")
+@TableName(value = "scrap_apply")
+public class ScrapApply implements Serializable {
     /**
      * 自增ID
      */
@@ -62,21 +62,6 @@ public class Scrap implements Serializable {
     @TableField(value = "state")
     @ApiModelProperty(value = "资产状态")
     private Integer state;
-
-    /**
-     * 同意人
-     */
-    @TableField(value = "consenter")
-    @ApiModelProperty(value = "同意人")
-    private String consenter;
-
-    /**
-     * 同意时间
-     */
-    @TableField(value = "agreed_time",fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "同意时间")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private String agreedTime;
 
     /**
      * 报废戳

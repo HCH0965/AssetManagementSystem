@@ -30,15 +30,15 @@
         </jdbcConnection>
 
         <!--实体类生成路径 targetPackage -->
-        <javaModelGenerator targetPackage="com.hch.model.entity"
-                            targetProject="ManagementSystem\src\main\java"/>
+        <javaModelGenerator targetPackage="hch.data.model.entity"
+                            targetProject="Data\src\main\java"/>
 
         <!--xml 生成路径 targetPackage -->
-        <sqlMapGenerator targetPackage="mapper" targetProject="ManagementSystem\src\main\resources\mappers"/>
+        <sqlMapGenerator targetPackage="mapper" targetProject="Data\src\main\resources\mappers"/>
 
         <!--mapper 生成路径 targetPackage -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.hch.mapper"
-                             targetProject="ManagementSystem\src\main\java"/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="hch.data.mapper"
+                             targetProject="Data\src\main\java"/>
         <!--生成全部表tableName设为%-->
         <table tableName="%" enableCountByExample="false" selectByExampleQueryId="false"
                enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false">

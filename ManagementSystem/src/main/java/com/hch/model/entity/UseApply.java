@@ -10,9 +10,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@ApiModel(value = "scrap")
-@TableName(value = "scrap")
-public class Scrap implements Serializable {
+@ApiModel(value = "use_apply")
+@TableName(value = "use_apply")
+public class UseApply implements Serializable {
     /**
      * 自增ID
      */
@@ -57,32 +57,24 @@ public class Scrap implements Serializable {
     private String applyTime;
 
     /**
-     * 资产状态（0:已申请 1:已通过）
+     * 资产状态（0: 已申请 1:已通过）
      */
     @TableField(value = "state")
     @ApiModelProperty(value = "资产状态")
     private Integer state;
 
     /**
-     * 同意人
+     * 所属部门
      */
-    @TableField(value = "consenter")
-    @ApiModelProperty(value = "同意人")
-    private String consenter;
+    @TableField(value = "department")
+    @ApiModelProperty(value = "所属部门")
+    private String department;
 
     /**
-     * 同意时间
+     * 使用时间
      */
-    @TableField(value = "agreed_time",fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "同意时间")
+    @TableField(value = "use_time",fill = FieldFill.INSERT)
+    @ApiModelProperty(value = "使用时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private String agreedTime;
-
-    /**
-     * 报废戳
-     */
-    @TableField(value = "scrap_time",fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "时间戳")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private String scrapTime;
+    private String useTime;
 }

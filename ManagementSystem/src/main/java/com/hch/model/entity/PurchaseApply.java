@@ -7,12 +7,11 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @Data
-@ApiModel(value = "scrap")
-@TableName(value = "scrap")
-public class Scrap implements Serializable {
+@ApiModel(value = "purchase_apply")
+@TableName(value = "purchase_apply")
+public class PurchaseApply implements Serializable {
     /**
      * 自增ID
      */
@@ -35,11 +34,25 @@ public class Scrap implements Serializable {
     private String assetName;
 
     /**
+     * 资产价格
+     */
+    @TableField(value = "price")
+    @ApiModelProperty(value = "资产价格")
+    private String price;
+
+    /**
      * 资产数量
      */
     @TableField(value = "number")
     @ApiModelProperty(value = "资产数量")
     private Integer number;
+
+    /**
+     * 总价
+     */
+    @TableField(value = "totalprice")
+    @ApiModelProperty(value = "总价")
+    private String totalprice;
 
     /**
      * 申请人
@@ -57,32 +70,17 @@ public class Scrap implements Serializable {
     private String applyTime;
 
     /**
-     * 资产状态（0:已申请 1:已通过）
+     * 资产状态（0: 已申请 1:已通过）
      */
     @TableField(value = "state")
     @ApiModelProperty(value = "资产状态")
     private Integer state;
 
     /**
-     * 同意人
+     * 时间戳
      */
-    @TableField(value = "consenter")
-    @ApiModelProperty(value = "同意人")
-    private String consenter;
-
-    /**
-     * 同意时间
-     */
-    @TableField(value = "agreed_time",fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "同意时间")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private String agreedTime;
-
-    /**
-     * 报废戳
-     */
-    @TableField(value = "scrap_time",fill = FieldFill.INSERT)
+    @TableField(value = "purchase_time",fill = FieldFill.INSERT)
     @ApiModelProperty(value = "时间戳")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private String scrapTime;
+    private String timestamp;
 }

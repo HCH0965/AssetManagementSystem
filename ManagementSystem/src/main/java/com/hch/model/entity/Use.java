@@ -85,5 +85,4 @@ public class Use implements Serializable {
     @ApiModelProperty(value = "使用时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private String useTime;
-
 }

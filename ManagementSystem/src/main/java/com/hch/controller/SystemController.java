@@ -4,10 +4,7 @@ import com.hch.common.R;
 import com.hch.model.dto.ApplyDTO;
 import com.hch.model.dto.UserLoginDTO;
 import com.hch.model.entity.Asset;
-import com.hch.service.AssetService;
-import com.hch.service.PurchaseService;
-import com.hch.service.ScrapService;
-import com.hch.service.UserService;
+import com.hch.service.*;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,10 +26,13 @@ public class SystemController {
     private AssetService assetService;
 
     @Autowired
-    private PurchaseService purchaseService;
+    private PurchaseApplyService purchaseApplyService;
 
     @Autowired
-    private ScrapService scrapService;
+    private ScrapApplyService scrapApplyService;
+
+    @Autowired
+    private UseApplyService useApplyService;
 
     @ApiOperation(value = "登录界面")
     @RequestMapping("/loginPage")
@@ -62,9 +62,9 @@ public class SystemController {
     }
 
     @ApiOperation(value = "购买申请")
-    @PostMapping("/purchase")
-    public String purchase(ApplyDTO applyDTO) {
-        R flag = purchaseService.purchase(applyDTO);
+    @PostMapping("/purchaseApply")
+    public String purchaseApply(ApplyDTO applyDTO) {
+        R flag = purchaseApplyService.purchaseApply(applyDTO);
         if (flag.succeeded()) {
             return homePage(null);
         }
@@ -72,8 +72,14 @@ public class SystemController {
     }
 
     @ApiOperation(value = "报废申请")
-    @PostMapping("/scrap")
-    public R<?> scrap(ApplyDTO applyDTO){
-        return scrapService.scrap(applyDTO);
+    @PostMapping("/scrapApply")
+    public R<?> scrapApply(ApplyDTO applyDTO){
+        return scrapApplyService.scrapApply(applyDTO);
+    }
+
+    @ApiOperation(value = "使用申请")
+    @PostMapping("/useApply")
+    public R<?> useApply(ApplyDTO applyDTO) {
+        return useApplyService.useApply(applyDTO);
     }
 }
