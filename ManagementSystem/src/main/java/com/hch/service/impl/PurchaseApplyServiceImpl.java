@@ -81,7 +81,9 @@ public class PurchaseApplyServiceImpl extends ServiceImpl<PurchaseApplyMapper, P
      */ @Override
     public R<?> purchaseApprove(ApproveDTO approveDTO) {
         if (approveDTO != null) {
+            //验证审核权限
             User user = systemService.getApproveUser(approveDTO.getUserId());
+            //验证资产状态
             PurchaseApply purchaseApply = purchaseApplyService.lambdaQuery()
                     .eq(PurchaseApply::getAssetId, approveDTO.getAssetId())
                     .eq(PurchaseApply::getStatus, MyEnum.APPLY_STATUS_ING)  //已申请状态
