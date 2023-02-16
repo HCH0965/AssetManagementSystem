@@ -90,6 +90,7 @@ public class PurchaseApplyServiceImpl extends ServiceImpl<PurchaseApplyMapper, P
                 //申请状态改为已通过
                 purchaseApply.setStatus(MyEnum.APPLY_STATUS_PASS.getCode());
                 purchaseApplyService.updateById(purchaseApply);
+                return R.Success();
             }
         }
         return R.Failed();
