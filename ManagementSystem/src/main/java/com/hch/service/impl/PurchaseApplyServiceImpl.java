@@ -3,19 +3,24 @@ package com.hch.service.impl;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hch.common.R;
+import com.hch.common.enums.MyEnum;
 import com.hch.mapper.PurchaseApplyMapper;
 import com.hch.model.dto.ApplyDTO;
+import com.hch.model.dto.ApproveDTO;
 import com.hch.model.entity.Asset;
 import com.hch.model.entity.PurchaseApply;
+import com.hch.model.entity.User;
 import com.hch.service.AssetService;
 import com.hch.service.PurchaseApplyService;
 import com.hch.service.SystemService;
+import com.hch.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class PurchaseApplyServiceImpl extends ServiceImpl<PurchaseApplyMapper, PurchaseApply> implements PurchaseApplyService {
     @Autowired
     private PurchaseApplyService purchaseApplyService;
@@ -26,12 +31,14 @@ public class PurchaseApplyServiceImpl extends ServiceImpl<PurchaseApplyMapper, P
     @Autowired
     private SystemService systemService;
 
+    @Autowired
+    private UserService userService;
+
     /**
      * 购买申请
      * @param applyDTO 资产信息
      * @return 返回结果
      */
-    @Transactional(rollbackFor = Exception.class)
     @Override
     public R<?> purchaseApply(ApplyDTO applyDTO) {
         if (applyDTO != null) {
@@ -63,6 +70,27 @@ public class PurchaseApplyServiceImpl extends ServiceImpl<PurchaseApplyMapper, P
             BeanUtils.copyProperties(purchaseApply, newAsset);
             assetService.save(newAsset);
             return R.Success();
+        }
+        return R.Failed();
+    }
+
+    /**
+     * 购买审核
+     * @param approveDTO 审核信息
+     * @return 返回结果
+     */ @Override
+    public R<?> purchaseApprove(ApproveDTO approveDTO) {
+        if (approveDTO != null) {
+            User user = systemService.getApproveUser(approveDTO.getUserId());
+            PurchaseApply purchaseApply = purchaseApplyService.lambdaQuery()
+                    .eq(PurchaseApply::getAssetId, approveDTO.getAssetId())
+                    .eq(PurchaseApply::getStatus, MyEnum.APPLY_STATUS_ING)  //已申请状态
+                    .one();
+            if (user!=null && purchaseApply!=null) {
+                //申请状态改为已通过
+                purchaseApply.setStatus(MyEnum.APPLY_STATUS_PASS.getCode());
+                purchaseApplyService.updateById(purchaseApply);
+            }
         }
         return R.Failed();
     }

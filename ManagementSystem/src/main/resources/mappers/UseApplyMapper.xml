@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="hch.data.mapper.UseApplyMapper">
-  <resultMap id="BaseResultMap" type="hch.data.model.entity.UseApply">
+<mapper namespace="com.hch.mapper.UseApplyMapper">
+  <resultMap id="BaseResultMap" type="com.hch.model.entity.UseApply">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="asset_id" jdbcType="VARCHAR" property="assetId" />
     <result column="asset_name" jdbcType="VARCHAR" property="assetName" />
     <result column="number" jdbcType="BIGINT" property="number" />
     <result column="applicant" jdbcType="VARCHAR" property="applicant" />
     <result column="apply_time" jdbcType="VARCHAR" property="applyTime" />
-    <result column="state" jdbcType="BIGINT" property="state" />
+    <result column="status" jdbcType="BIGINT" property="status" />
     <result column="department" jdbcType="VARCHAR" property="department" />
     <result column="timestamp" jdbcType="TIMESTAMP" property="timestamp" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, asset_id, asset_name, number, applicant, apply_time, state, department, timestamp
+    id, asset_id, asset_name, number, applicant, apply_time, status, department, timestamp
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -25,18 +25,18 @@
     delete from use_apply
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="hch.data.model.entity.UseApply">
+  <insert id="insert" parameterType="UseApply">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into use_apply (asset_id, asset_name, number, 
-      applicant, apply_time, state, 
+      applicant, apply_time, status, 
       department, timestamp)
     values (#{assetId,jdbcType=VARCHAR}, #{assetName,jdbcType=VARCHAR}, #{number,jdbcType=BIGINT}, 
-      #{applicant,jdbcType=VARCHAR}, #{applyTime,jdbcType=VARCHAR}, #{state,jdbcType=BIGINT}, 
+      #{applicant,jdbcType=VARCHAR}, #{applyTime,jdbcType=VARCHAR}, #{status,jdbcType=BIGINT}, 
       #{department,jdbcType=VARCHAR}, #{timestamp,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="hch.data.model.entity.UseApply">
+  <insert id="insertSelective" parameterType="UseApply">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -57,8 +57,8 @@
       <if test="applyTime != null">
         apply_time,
       </if>
-      <if test="state != null">
-        state,
+      <if test="status != null">
+        status,
       </if>
       <if test="department != null">
         department,
@@ -83,8 +83,8 @@
       <if test="applyTime != null">
         #{applyTime,jdbcType=VARCHAR},
       </if>
-      <if test="state != null">
-        #{state,jdbcType=BIGINT},
+      <if test="status != null">
+        #{status,jdbcType=BIGINT},
       </if>
       <if test="department != null">
         #{department,jdbcType=VARCHAR},
@@ -94,7 +94,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="hch.data.model.entity.UseApply">
+  <update id="updateByPrimaryKeySelective" parameterType="UseApply">
     update use_apply
     <set>
       <if test="assetId != null">
@@ -112,8 +112,8 @@
       <if test="applyTime != null">
         apply_time = #{applyTime,jdbcType=VARCHAR},
       </if>
-      <if test="state != null">
-        state = #{state,jdbcType=BIGINT},
+      <if test="status != null">
+        status = #{status,jdbcType=BIGINT},
       </if>
       <if test="department != null">
         department = #{department,jdbcType=VARCHAR},
@@ -124,14 +124,14 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="hch.data.model.entity.UseApply">
+  <update id="updateByPrimaryKey" parameterType="UseApply">
     update use_apply
     set asset_id = #{assetId,jdbcType=VARCHAR},
       asset_name = #{assetName,jdbcType=VARCHAR},
       number = #{number,jdbcType=BIGINT},
       applicant = #{applicant,jdbcType=VARCHAR},
       apply_time = #{applyTime,jdbcType=VARCHAR},
-      state = #{state,jdbcType=BIGINT},
+      status = #{status,jdbcType=BIGINT},
       department = #{department,jdbcType=VARCHAR},
       timestamp = #{timestamp,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

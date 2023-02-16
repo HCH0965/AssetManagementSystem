@@ -42,14 +42,14 @@ public class User implements Serializable {
     private String password;
 
     /**
-     * 角色（0:管理员 1:用户）
+     * 角色（0:用户 1:管理员 2:无权限用户）
      */
     @TableField(value = "role")
     @ApiModelProperty(value = "角色")
     private Integer role;
 
     /**
-     * 权限（0:可申请 1:可审核）
+     * 权限（0:可申请 1:可审核 2:无权限）
      */
     @TableField(value = "authority")
     @ApiModelProperty(value = "权限")
@@ -68,4 +68,12 @@ public class User implements Serializable {
     @TableField(value = "position")
     @ApiModelProperty(value = "职位")
     private String position;
+
+    /**
+     * 时间戳
+     */
+    @TableField(value = "purchase_time",fill = FieldFill.INSERT)
+    @ApiModelProperty(value = "时间戳")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private String timestamp;
 }

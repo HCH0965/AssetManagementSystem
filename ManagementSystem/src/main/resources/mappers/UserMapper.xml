@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="hch.data.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="hch.data.model.entity.User">
+<mapper namespace="UserMapper">
+  <resultMap id="BaseResultMap" type="User">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="username" jdbcType="VARCHAR" property="username" />
@@ -25,7 +25,7 @@
     delete from user
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="hch.data.model.entity.User">
+  <insert id="insert" parameterType="User">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -36,7 +36,7 @@
       #{role,jdbcType=BIGINT}, #{authority,jdbcType=BIGINT}, #{department,jdbcType=VARCHAR}, 
       #{position,jdbcType=VARCHAR}, #{timestamp,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="hch.data.model.entity.User">
+  <insert id="insertSelective" parameterType="User">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -94,7 +94,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="hch.data.model.entity.User">
+  <update id="updateByPrimaryKeySelective" parameterType="User">
     update user
     <set>
       <if test="userId != null">
@@ -124,7 +124,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="hch.data.model.entity.User">
+  <update id="updateByPrimaryKey" parameterType="User">
     update user
     set user_id = #{userId,jdbcType=VARCHAR},
       username = #{username,jdbcType=VARCHAR},

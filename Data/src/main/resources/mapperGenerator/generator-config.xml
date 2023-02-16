@@ -29,12 +29,13 @@
             <property name="nullCatalogMeansCurrent" value="true" />
         </jdbcConnection>
 
-        <!--实体类生成路径 targetPackage -->
+        <!--entity 生成路径 targetPackage -->
         <javaModelGenerator targetPackage="hch.data.model.entity"
                             targetProject="Data\src\main\java"/>
 
         <!--xml 生成路径 targetPackage -->
-        <sqlMapGenerator targetPackage="mapper" targetProject="Data\src\main\resources\mappers"/>
+        <sqlMapGenerator targetPackage="mappers"
+                         targetProject="Data\src\main\resources"/>
 
         <!--mapper 生成路径 targetPackage -->
         <javaClientGenerator type="XMLMAPPER" targetPackage="hch.data.mapper"

@@ -15,6 +15,28 @@ public enum MyEnum {
     ASSE_NUMBER_NONE(0, "0"),
 
     /**
+     * 申请状态
+     */
+    APPLY_STATUS_ING(0, "已申请"),
+    APPLY_STATUS_PASS(1, "已通过"),
+    APPLY_STATUS_DONE(2, "已购买"),
+
+    /**
+     * 用户权限
+     */
+    USER_AUTHORITY_APPLY(0, "可申请"),
+    USER_AUTHORITY_APPROVE(1, "可审核"),
+    USER_AUTHORITY_NONE(2, "无权限"),
+
+    /**
+     * 用户角色
+     */
+    USER_ROLE_USER(0, "用户"),
+    USER_ROLE_MANAGER(1, "管理员"),
+
+    USER_ROLE_NONE(2, "无权限用户"),
+
+    /**
      * 错误标识
      */
     ERROR(100500,"错误标识");

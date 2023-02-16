@@ -23,6 +23,7 @@ public class UseApply implements Serializable {
     /**
      * 资产编号
      */
+    @TableId(value = "asset_id")
     @TableField(value = "asset_id")
     @ApiModelProperty(value = "资产编号")
     private String assetId;
@@ -57,11 +58,11 @@ public class UseApply implements Serializable {
     private String applyTime;
 
     /**
-     * 资产状态（0: 已申请 1:已通过）
+     * 申请状态（0: 已申请 1:已通过 3:使用中）
      */
-    @TableField(value = "state")
-    @ApiModelProperty(value = "资产状态")
-    private Integer state;
+    @TableField(value = "status")
+    @ApiModelProperty(value = "申请状态")
+    private Integer status;
 
     /**
      * 所属部门
@@ -71,10 +72,10 @@ public class UseApply implements Serializable {
     private String department;
 
     /**
-     * 使用时间
+     * 时间戳
      */
-    @TableField(value = "use_time",fill = FieldFill.INSERT)
-    @ApiModelProperty(value = "使用时间")
+    @TableField(value = "purchase_time",fill = FieldFill.INSERT)
+    @ApiModelProperty(value = "时间戳")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private String useTime;
+    private String timestamp;
 }

@@ -23,6 +23,7 @@ public class ScrapApply implements Serializable {
     /**
      * 资产编号
      */
+    @TableId(value = "asset_id")
     @TableField(value = "asset_id")
     @ApiModelProperty(value = "资产编号")
     private String assetId;
@@ -57,17 +58,17 @@ public class ScrapApply implements Serializable {
     private String applyTime;
 
     /**
-     * 资产状态（0:已申请 1:已通过）
+     * 申请状态（0: 已申请 1:已通过 3:已报废）
      */
-    @TableField(value = "state")
-    @ApiModelProperty(value = "资产状态")
-    private Integer state;
+    @TableField(value = "status")
+    @ApiModelProperty(value = "申请状态")
+    private Integer status;
 
     /**
-     * 报废戳
+     * 时间戳
      */
-    @TableField(value = "scrap_time",fill = FieldFill.INSERT)
+    @TableField(value = "purchase_time",fill = FieldFill.INSERT)
     @ApiModelProperty(value = "时间戳")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private String scrapTime;
+    private String timestamp;
 }

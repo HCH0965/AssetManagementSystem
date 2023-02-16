@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hch.mapper.AssetMapper">
+  <resultMap id="BaseResultMap" type="com.hch.model.entity.Asset">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="asset_id" jdbcType="VARCHAR" property="assetId" />
+    <result column="asset_name" jdbcType="VARCHAR" property="assetName" />
+    <result column="state" jdbcType="BIGINT" property="state" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="number" jdbcType="BIGINT" property="number" />
+    <result column="totalprice" jdbcType="VARCHAR" property="totalprice" />
+    <result column="department" jdbcType="VARCHAR" property="department" />
+    <result column="timestamp" jdbcType="TIMESTAMP" property="timestamp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, asset_id, asset_name, state, price, number, totalprice, department, timestamp
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from asset
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from asset
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hch.model.entity.Asset">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into asset (asset_id, asset_name, state, 
+      price, number, totalprice, 
+      department, timestamp)
+    values (#{assetId,jdbcType=VARCHAR}, #{assetName,jdbcType=VARCHAR}, #{state,jdbcType=BIGINT}, 
+      #{price,jdbcType=VARCHAR}, #{number,jdbcType=BIGINT}, #{totalprice,jdbcType=VARCHAR}, 
+      #{department,jdbcType=VARCHAR}, #{timestamp,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hch.model.entity.Asset">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into asset
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="assetId != null">
+        asset_id,
+      </if>
+      <if test="assetName != null">
+        asset_name,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="totalprice != null">
+        totalprice,
+      </if>
+      <if test="department != null">
+        department,
+      </if>
+      <if test="timestamp != null">
+        timestamp,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="assetId != null">
+        #{assetId,jdbcType=VARCHAR},
+      </if>
+      <if test="assetName != null">
+        #{assetName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=BIGINT},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=BIGINT},
+      </if>
+      <if test="totalprice != null">
+        #{totalprice,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="timestamp != null">
+        #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hch.model.entity.Asset">
+    update asset
+    <set>
+      <if test="assetId != null">
+        asset_id = #{assetId,jdbcType=VARCHAR},
+      </if>
+      <if test="assetName != null">
+        asset_name = #{assetName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=BIGINT},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=BIGINT},
+      </if>
+      <if test="totalprice != null">
+        totalprice = #{totalprice,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="timestamp != null">
+        timestamp = #{timestamp,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hch.model.entity.Asset">
+    update asset
+    set asset_id = #{assetId,jdbcType=VARCHAR},
+      asset_name = #{assetName,jdbcType=VARCHAR},
+      state = #{state,jdbcType=BIGINT},
+      price = #{price,jdbcType=VARCHAR},
+      number = #{number,jdbcType=BIGINT},
+      totalprice = #{totalprice,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      timestamp = #{timestamp,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

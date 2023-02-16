@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="hch.data.mapper.ScrapApplyMapper">
-  <resultMap id="BaseResultMap" type="hch.data.model.entity.ScrapApply">
+<mapper namespace="com.hch.mapper.ScrapApplyMapper">
+  <resultMap id="BaseResultMap" type="com.hch.model.entity.ScrapApply">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="asset_id" jdbcType="VARCHAR" property="assetId" />
     <result column="asset_name" jdbcType="VARCHAR" property="assetName" />
     <result column="number" jdbcType="BIGINT" property="number" />
     <result column="applicant" jdbcType="VARCHAR" property="applicant" />
     <result column="apply_time" jdbcType="VARCHAR" property="applyTime" />
-    <result column="state" jdbcType="BIGINT" property="state" />
+    <result column="status" jdbcType="BIGINT" property="status" />
     <result column="timestamp" jdbcType="TIMESTAMP" property="timestamp" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, asset_id, asset_name, number, applicant, apply_time, state, timestamp
+    id, asset_id, asset_name, number, applicant, apply_time, status, timestamp
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -24,18 +24,18 @@
     delete from scrap_apply
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="hch.data.model.entity.ScrapApply">
+  <insert id="insert" parameterType="ScrapApply">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into scrap_apply (asset_id, asset_name, number, 
-      applicant, apply_time, state, 
+      applicant, apply_time, status, 
       timestamp)
     values (#{assetId,jdbcType=VARCHAR}, #{assetName,jdbcType=VARCHAR}, #{number,jdbcType=BIGINT}, 
-      #{applicant,jdbcType=VARCHAR}, #{applyTime,jdbcType=VARCHAR}, #{state,jdbcType=BIGINT}, 
+      #{applicant,jdbcType=VARCHAR}, #{applyTime,jdbcType=VARCHAR}, #{status,jdbcType=BIGINT}, 
       #{timestamp,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="hch.data.model.entity.ScrapApply">
+  <insert id="insertSelective" parameterType="ScrapApply">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -56,8 +56,8 @@
       <if test="applyTime != null">
         apply_time,
       </if>
-      <if test="state != null">
-        state,
+      <if test="status != null">
+        status,
       </if>
       <if test="timestamp != null">
         timestamp,
@@ -79,15 +79,15 @@
       <if test="applyTime != null">
         #{applyTime,jdbcType=VARCHAR},
       </if>
-      <if test="state != null">
-        #{state,jdbcType=BIGINT},
+      <if test="status != null">
+        #{status,jdbcType=BIGINT},
       </if>
       <if test="timestamp != null">
         #{timestamp,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="hch.data.model.entity.ScrapApply">
+  <update id="updateByPrimaryKeySelective" parameterType="ScrapApply">
     update scrap_apply
     <set>
       <if test="assetId != null">
@@ -105,8 +105,8 @@
       <if test="applyTime != null">
         apply_time = #{applyTime,jdbcType=VARCHAR},
       </if>
-      <if test="state != null">
-        state = #{state,jdbcType=BIGINT},
+      <if test="status != null">
+        status = #{status,jdbcType=BIGINT},
       </if>
       <if test="timestamp != null">
         timestamp = #{timestamp,jdbcType=TIMESTAMP},
@@ -114,14 +114,14 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="hch.data.model.entity.ScrapApply">
+  <update id="updateByPrimaryKey" parameterType="ScrapApply">
     update scrap_apply
     set asset_id = #{assetId,jdbcType=VARCHAR},
       asset_name = #{assetName,jdbcType=VARCHAR},
       number = #{number,jdbcType=BIGINT},
       applicant = #{applicant,jdbcType=VARCHAR},
       apply_time = #{applyTime,jdbcType=VARCHAR},
-      state = #{state,jdbcType=BIGINT},
+      status = #{status,jdbcType=BIGINT},
       timestamp = #{timestamp,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

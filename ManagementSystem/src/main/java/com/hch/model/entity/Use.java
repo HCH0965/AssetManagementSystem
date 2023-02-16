@@ -85,4 +85,12 @@ public class Use implements Serializable {
     @ApiModelProperty(value = "使用时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private String useTime;
+
+    /**
+     * 时间戳
+     */
+    @TableField(value = "purchase_time",fill = FieldFill.INSERT)
+    @ApiModelProperty(value = "时间戳")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private String timestamp;
 }

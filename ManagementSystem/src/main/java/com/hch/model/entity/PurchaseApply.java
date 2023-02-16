@@ -9,6 +9,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
+
 @ApiModel(value = "purchase_apply")
 @TableName(value = "purchase_apply")
 public class PurchaseApply implements Serializable {
@@ -22,6 +23,7 @@ public class PurchaseApply implements Serializable {
     /**
      * 资产编号
      */
+    @TableId(value = "asset_id")
     @TableField(value = "asset_id")
     @ApiModelProperty(value = "资产编号")
     private String assetId;
@@ -70,11 +72,11 @@ public class PurchaseApply implements Serializable {
     private String applyTime;
 
     /**
-     * 资产状态（0: 已申请 1:已通过）
+     * 申请状态（0: 已申请 1:已通过 3:已购买）
      */
-    @TableField(value = "state")
-    @ApiModelProperty(value = "资产状态")
-    private Integer state;
+    @TableField(value = "status")
+    @ApiModelProperty(value = "申请状态")
+    private Integer status;
 
     /**
      * 时间戳

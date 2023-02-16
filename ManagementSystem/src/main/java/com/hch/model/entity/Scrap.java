@@ -85,4 +85,12 @@ public class Scrap implements Serializable {
     @ApiModelProperty(value = "时间戳")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private String scrapTime;
+
+    /**
+     * 时间戳
+     */
+    @TableField(value = "purchase_time",fill = FieldFill.INSERT)
+    @ApiModelProperty(value = "时间戳")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private String timestamp;
 }
