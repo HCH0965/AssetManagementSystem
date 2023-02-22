@@ -30,7 +30,7 @@
         </jdbcConnection>
 
         <!--entity 生成路径 targetPackage -->
-        <javaModelGenerator targetPackage="hch.data.model.entity"
+        <javaModelGenerator targetPackage="com.hch.model.entity"
                             targetProject="Data\src\main\java"/>
 
         <!--xml 生成路径 targetPackage -->
@@ -38,7 +38,7 @@
                          targetProject="Data\src\main\resources"/>
 
         <!--mapper 生成路径 targetPackage -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="hch.data.mapper"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.hch.mapper"
                              targetProject="Data\src\main\java"/>
         <!--生成全部表tableName设为%-->
         <table tableName="%" enableCountByExample="false" selectByExampleQueryId="false"

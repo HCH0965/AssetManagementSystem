@@ -79,6 +79,36 @@ public class PurchaseApply implements Serializable {
     private Integer status;
 
     /**
+     * 审核人
+     */
+    @TableField(value = "approver")
+    @ApiModelProperty(value = "审核人")
+    private String approver;
+
+    /**
+     * 审核时间
+     */
+    @TableField(value = "approve_time",fill = FieldFill.INSERT)
+    @ApiModelProperty(value = "审核时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private String approveTime;
+
+    /**
+     * 执行人
+     */
+    @TableField(value = "executor")
+    @ApiModelProperty(value = "执行人")
+    private String executor;
+
+    /**
+     * 执行时间
+     */
+    @TableField(value = "execute_time",fill = FieldFill.INSERT)
+    @ApiModelProperty(value = "执行时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private String executeTime;
+
+    /**
      * 时间戳
      */
     @TableField(value = "purchase_time",fill = FieldFill.INSERT)

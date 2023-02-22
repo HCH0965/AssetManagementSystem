@@ -16,11 +16,19 @@ public class PurchaseApply implements Serializable {
 
     private String totalprice;
 
+    private Long status;
+
     private String applicant;
 
     private String applyTime;
 
-    private Long status;
+    private String approver;
+
+    private String approveTime;
+
+    private String executor;
+
+    private String executeTime;
 
     private Date timestamp;
 
@@ -74,6 +82,14 @@ public class PurchaseApply implements Serializable {
         this.totalprice = totalprice;
     }
 
+    public Long getStatus() {
+        return status;
+    }
+
+    public void setStatus(Long status) {
+        this.status = status;
+    }
+
     public String getApplicant() {
         return applicant;
     }
@@ -90,12 +106,36 @@ public class PurchaseApply implements Serializable {
         this.applyTime = applyTime;
     }
 
-    public Long getStatus() {
-        return status;
+    public String getApprover() {
+        return approver;
     }
 
-    public void setStatus(Long status) {
-        this.status = status;
+    public void setApprover(String approver) {
+        this.approver = approver;
+    }
+
+    public String getApproveTime() {
+        return approveTime;
+    }
+
+    public void setApproveTime(String approveTime) {
+        this.approveTime = approveTime;
+    }
+
+    public String getExecutor() {
+        return executor;
+    }
+
+    public void setExecutor(String executor) {
+        this.executor = executor;
+    }
+
+    public String getExecuteTime() {
+        return executeTime;
+    }
+
+    public void setExecuteTime(String executeTime) {
+        this.executeTime = executeTime;
     }
 
     public Date getTimestamp() {
@@ -118,9 +158,13 @@ public class PurchaseApply implements Serializable {
         sb.append(", price=").append(price);
         sb.append(", number=").append(number);
         sb.append(", totalprice=").append(totalprice);
+        sb.append(", status=").append(status);
         sb.append(", applicant=").append(applicant);
         sb.append(", applyTime=").append(applyTime);
-        sb.append(", status=").append(status);
+        sb.append(", approver=").append(approver);
+        sb.append(", approveTime=").append(approveTime);
+        sb.append(", executor=").append(executor);
+        sb.append(", executeTime=").append(executeTime);
         sb.append(", timestamp=").append(timestamp);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

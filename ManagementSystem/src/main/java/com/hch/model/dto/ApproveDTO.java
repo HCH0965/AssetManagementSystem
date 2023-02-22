@@ -8,4 +8,8 @@ public class ApproveDTO {
 
     private String userId;
 
+    /**
+     * 审核是否通过 0:通过 1:不通过
+     */
+    private Integer isApprove;
 }

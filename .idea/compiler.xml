@@ -13,12 +13,14 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Data" target="1.8" />
+      <module name="DataGenerator" target="1.8" />
       <module name="ManagementSystem" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Data" options="-parameters" />
+      <module name="DataGenerator" options="-parameters" />
       <module name="ManagementSystem" options="-parameters" />
     </option>
   </component>

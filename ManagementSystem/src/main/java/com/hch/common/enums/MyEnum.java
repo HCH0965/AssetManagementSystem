@@ -20,6 +20,7 @@ public enum MyEnum {
     APPLY_STATUS_ING(0, "已申请"),
     APPLY_STATUS_PASS(1, "已通过"),
     APPLY_STATUS_DONE(2, "已购买"),
+    APPLY_STATUS_NOTPASS(3, "未通过审核"),
 
     /**
      * 用户权限
@@ -35,6 +36,12 @@ public enum MyEnum {
     USER_ROLE_MANAGER(1, "管理员"),
 
     USER_ROLE_NONE(2, "无权限用户"),
+
+    /**
+     * 审核是否通过
+     */
+    APPROVE_PASS_YES(0, "通过"),
+    APPROVE_PASS_NO(1, "不通过"),
 
     /**
      * 错误标识

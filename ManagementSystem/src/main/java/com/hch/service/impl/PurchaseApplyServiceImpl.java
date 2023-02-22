@@ -36,6 +36,7 @@ public class PurchaseApplyServiceImpl extends ServiceImpl<PurchaseApplyMapper, P
 
     /**
      * 购买申请
+     *
      * @param applyDTO 资产信息
      * @return 返回结果
      */
@@ -76,9 +77,12 @@ public class PurchaseApplyServiceImpl extends ServiceImpl<PurchaseApplyMapper, P
 
     /**
      * 购买审核
+     *
      * @param approveDTO 审核信息
      * @return 返回结果
-     */ @Override
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Override
     public R<?> purchaseApprove(ApproveDTO approveDTO) {
         if (approveDTO != null) {
             //验证审核权限
@@ -88,11 +92,21 @@ public class PurchaseApplyServiceImpl extends ServiceImpl<PurchaseApplyMapper, P
                     .eq(PurchaseApply::getAssetId, approveDTO.getAssetId())
                     .eq(PurchaseApply::getStatus, MyEnum.APPLY_STATUS_ING)  //已申请状态
                     .one();
-            if (user!=null && purchaseApply!=null) {
-                //申请状态改为已通过
-                purchaseApply.setStatus(MyEnum.APPLY_STATUS_PASS.getCode());
-                purchaseApplyService.updateById(purchaseApply);
-                return R.Success();
+            if ((user != null) && (purchaseApply != null)) {
+                //设置审核时间
+                purchaseApply.setApprover(systemService.nowTime());
+                if (approveDTO.getIsApprove() == MyEnum.APPROVE_PASS_YES.getCode()) {
+                    //审核通过，申请状态改为已通过
+                    purchaseApply.setStatus(MyEnum.APPLY_STATUS_PASS.getCode());
+                    purchaseApplyService.updateById(purchaseApply);
+                    return R.Success();
+                }
+                if (approveDTO.getIsApprove() == MyEnum.APPROVE_PASS_NO.getCode()) {
+                    //审核不通过，申请状态改为未通过审核
+                    purchaseApply.setStatus(MyEnum.APPLY_STATUS_NOTPASS.getCode());
+                    purchaseApplyService.updateById(purchaseApply);
+                    return R.Success();
+                }
             }
         }
         return R.Failed();

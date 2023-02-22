@@ -5,8 +5,10 @@ import com.hch.common.R;
 import com.hch.common.enums.MyEnum;
 import com.hch.mapper.UseApplyMapper;
 import com.hch.model.dto.ApplyDTO;
+import com.hch.model.dto.ApproveDTO;
 import com.hch.model.entity.Asset;
 import com.hch.model.entity.UseApply;
+import com.hch.model.entity.User;
 import com.hch.service.AssetService;
 import com.hch.service.SystemService;
 import com.hch.service.UseApplyService;
@@ -28,6 +30,7 @@ public class UseApplyServiceImpl extends ServiceImpl<UseApplyMapper, UseApply> i
 
     /**
      * 使用申请
+     *
      * @param applyDTO 使用参数
      * @return 返回结果
      */
@@ -50,7 +53,43 @@ public class UseApplyServiceImpl extends ServiceImpl<UseApplyMapper, UseApply> i
                 useApplyService.save(useApply);
                 return R.Success();
             }
+        }
+        return R.Failed();
+    }
 
+    /**
+     * 使用审核
+     *
+     * @param approveDTO 使用参数
+     * @return 返回结果
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public R<?> useApprove(ApproveDTO approveDTO) {
+        if (approveDTO != null) {
+            //验证审核权限
+            User user = systemService.getApproveUser(approveDTO.getUserId());
+            //验证资产状态
+            UseApply useApply = useApplyService.lambdaQuery()
+                    .eq(UseApply::getAssetId, approveDTO.getAssetId())
+                    .eq(UseApply::getStatus, MyEnum.APPLY_STATUS_ING)  //已申请状态
+                    .one();
+            if ((user != null) && (useApply != null)) {
+                //设置审核时间
+                useApply.setApprover(systemService.nowTime());
+                if (approveDTO.getIsApprove() == MyEnum.APPROVE_PASS_YES.getCode()) {
+                    //审核通过，申请状态改为已通过
+                    useApply.setStatus(MyEnum.APPLY_STATUS_PASS.getCode());
+                    useApplyService.updateById(useApply);
+                    return R.Success();
+                }
+                if (approveDTO.getIsApprove() == MyEnum.APPROVE_PASS_NO.getCode()) {
+                    //审核不通过，申请状态改为未通过审核
+                    useApply.setStatus(MyEnum.APPLY_STATUS_NOTPASS.getCode());
+                    useApplyService.updateById(useApply);
+                    return R.Success();
+                }
+            }
         }
         return R.Failed();
     }
