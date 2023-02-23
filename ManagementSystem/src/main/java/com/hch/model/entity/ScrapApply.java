@@ -36,6 +36,13 @@ public class ScrapApply implements Serializable {
     private String assetName;
 
     /**
+     * 厂商
+     */
+    @TableField(value = "manufacturer")
+    @ApiModelProperty(value = "厂商")
+    private String manufacturer;
+
+    /**
      * 资产数量
      */
     @TableField(value = "number")
@@ -55,10 +62,10 @@ public class ScrapApply implements Serializable {
     @TableField(value = "apply_time",fill = FieldFill.INSERT)
     @ApiModelProperty(value = "申请时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private String applyTime;
+    private Date applyTime;
 
     /**
-     * 申请状态（0: 已申请 1:已通过 3:已报废）
+     * 申请状态（0:已申请 1:已通过 3:已报废 4:不通过）
      */
     @TableField(value = "status")
     @ApiModelProperty(value = "申请状态")
@@ -77,7 +84,7 @@ public class ScrapApply implements Serializable {
     @TableField(value = "approve_time",fill = FieldFill.INSERT)
     @ApiModelProperty(value = "审核时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private String approveTime;
+    private Date approveTime;
 
     /**
      * 执行人
@@ -92,7 +99,7 @@ public class ScrapApply implements Serializable {
     @TableField(value = "execute_time",fill = FieldFill.INSERT)
     @ApiModelProperty(value = "执行时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private String executeTime;
+    private Date executeTime;
 
     /**
      * 时间戳
@@ -100,5 +107,5 @@ public class ScrapApply implements Serializable {
     @TableField(value = "purchase_time",fill = FieldFill.INSERT)
     @ApiModelProperty(value = "时间戳")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private String timestamp;
+    private Date timestamp;
 }

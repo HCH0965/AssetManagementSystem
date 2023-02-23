@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class User implements Serializable {
-    private Long id;
+    private Integer id;
 
     private String userId;
 
@@ -12,9 +12,9 @@ public class User implements Serializable {
 
     private String password;
 
-    private Long role;
+    private Integer role;
 
-    private Long authority;
+    private Integer authority;
 
     private String department;
 
@@ -24,11 +24,11 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -56,19 +56,19 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Long getRole() {
+    public Integer getRole() {
         return role;
     }
 
-    public void setRole(Long role) {
+    public void setRole(Integer role) {
         this.role = role;
     }
 
-    public Long getAuthority() {
+    public Integer getAuthority() {
         return authority;
     }
 
-    public void setAuthority(Long authority) {
+    public void setAuthority(Integer authority) {
         this.authority = authority;
     }
 

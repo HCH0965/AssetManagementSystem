@@ -1,43 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="AssetMapper">
-  <resultMap id="BaseResultMap" type="Asset">
-    <id column="id" jdbcType="BIGINT" property="id" />
+<mapper namespace="com.hch.mapper.AssetMapper">
+  <resultMap id="BaseResultMap" type="com.hch.model.entity.Asset">
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="asset_id" jdbcType="VARCHAR" property="assetId" />
     <result column="asset_name" jdbcType="VARCHAR" property="assetName" />
-    <result column="state" jdbcType="BIGINT" property="state" />
+    <result column="manufacturer" jdbcType="VARCHAR" property="manufacturer" />
+    <result column="state" jdbcType="INTEGER" property="state" />
     <result column="price" jdbcType="VARCHAR" property="price" />
-    <result column="number" jdbcType="BIGINT" property="number" />
+    <result column="number" jdbcType="INTEGER" property="number" />
     <result column="totalprice" jdbcType="VARCHAR" property="totalprice" />
     <result column="department" jdbcType="VARCHAR" property="department" />
     <result column="timestamp" jdbcType="TIMESTAMP" property="timestamp" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, asset_id, asset_name, state, price, number, totalprice, department, timestamp
+    id, asset_id, asset_name, manufacturer, state, price, number, totalprice, department, 
+    timestamp
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from asset
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from asset
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="Asset">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+  <insert id="insert" parameterType="com.hch.model.entity.Asset">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into asset (asset_id, asset_name, state, 
-      price, number, totalprice, 
-      department, timestamp)
-    values (#{assetId,jdbcType=VARCHAR}, #{assetName,jdbcType=VARCHAR}, #{state,jdbcType=BIGINT}, 
-      #{price,jdbcType=VARCHAR}, #{number,jdbcType=BIGINT}, #{totalprice,jdbcType=VARCHAR}, 
-      #{department,jdbcType=VARCHAR}, #{timestamp,jdbcType=TIMESTAMP})
+    insert into asset (asset_id, asset_name, manufacturer, 
+      state, price, number, 
+      totalprice, department, timestamp
+      )
+    values (#{assetId,jdbcType=VARCHAR}, #{assetName,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{price,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
+      #{totalprice,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{timestamp,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="Asset">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+  <insert id="insertSelective" parameterType="com.hch.model.entity.Asset">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into asset
@@ -47,6 +51,9 @@
       </if>
       <if test="assetName != null">
         asset_name,
+      </if>
+      <if test="manufacturer != null">
+        manufacturer,
       </if>
       <if test="state != null">
         state,
@@ -74,14 +81,17 @@
       <if test="assetName != null">
         #{assetName,jdbcType=VARCHAR},
       </if>
+      <if test="manufacturer != null">
+        #{manufacturer,jdbcType=VARCHAR},
+      </if>
       <if test="state != null">
-        #{state,jdbcType=BIGINT},
+        #{state,jdbcType=INTEGER},
       </if>
       <if test="price != null">
         #{price,jdbcType=VARCHAR},
       </if>
       <if test="number != null">
-        #{number,jdbcType=BIGINT},
+        #{number,jdbcType=INTEGER},
       </if>
       <if test="totalprice != null">
         #{totalprice,jdbcType=VARCHAR},
@@ -94,7 +104,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="Asset">
+  <update id="updateByPrimaryKeySelective" parameterType="com.hch.model.entity.Asset">
     update asset
     <set>
       <if test="assetId != null">
@@ -103,14 +113,17 @@
       <if test="assetName != null">
         asset_name = #{assetName,jdbcType=VARCHAR},
       </if>
+      <if test="manufacturer != null">
+        manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      </if>
       <if test="state != null">
-        state = #{state,jdbcType=BIGINT},
+        state = #{state,jdbcType=INTEGER},
       </if>
       <if test="price != null">
         price = #{price,jdbcType=VARCHAR},
       </if>
       <if test="number != null">
-        number = #{number,jdbcType=BIGINT},
+        number = #{number,jdbcType=INTEGER},
       </if>
       <if test="totalprice != null">
         totalprice = #{totalprice,jdbcType=VARCHAR},
@@ -122,18 +135,19 @@
         timestamp = #{timestamp,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="Asset">
+  <update id="updateByPrimaryKey" parameterType="com.hch.model.entity.Asset">
     update asset
     set asset_id = #{assetId,jdbcType=VARCHAR},
       asset_name = #{assetName,jdbcType=VARCHAR},
-      state = #{state,jdbcType=BIGINT},
+      manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
       price = #{price,jdbcType=VARCHAR},
-      number = #{number,jdbcType=BIGINT},
+      number = #{number,jdbcType=INTEGER},
       totalprice = #{totalprice,jdbcType=VARCHAR},
       department = #{department,jdbcType=VARCHAR},
       timestamp = #{timestamp,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

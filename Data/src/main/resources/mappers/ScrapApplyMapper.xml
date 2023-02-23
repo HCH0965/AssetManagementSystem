@@ -2,48 +2,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hch.mapper.ScrapApplyMapper">
   <resultMap id="BaseResultMap" type="com.hch.model.entity.ScrapApply">
-    <id column="id" jdbcType="BIGINT" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="asset_id" jdbcType="VARCHAR" property="assetId" />
     <result column="asset_name" jdbcType="VARCHAR" property="assetName" />
-    <result column="number" jdbcType="BIGINT" property="number" />
-    <result column="status" jdbcType="BIGINT" property="status" />
+    <result column="manufacturer" jdbcType="VARCHAR" property="manufacturer" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="applicant" jdbcType="VARCHAR" property="applicant" />
-    <result column="apply_time" jdbcType="VARCHAR" property="applyTime" />
+    <result column="apply_time" jdbcType="TIMESTAMP" property="applyTime" />
     <result column="approver" jdbcType="VARCHAR" property="approver" />
-    <result column="approve_time" jdbcType="VARCHAR" property="approveTime" />
+    <result column="approve_time" jdbcType="TIMESTAMP" property="approveTime" />
     <result column="executor" jdbcType="VARCHAR" property="executor" />
-    <result column="execute_time" jdbcType="VARCHAR" property="executeTime" />
+    <result column="execute_time" jdbcType="TIMESTAMP" property="executeTime" />
     <result column="timestamp" jdbcType="TIMESTAMP" property="timestamp" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, asset_id, asset_name, number, status, applicant, apply_time, approver, approve_time, 
-    executor, execute_time, timestamp
+    id, asset_id, asset_name, manufacturer, number, status, applicant, apply_time, approver, 
+    approve_time, executor, execute_time, timestamp
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from scrap_apply
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from scrap_apply
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hch.model.entity.ScrapApply">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into scrap_apply (asset_id, asset_name, number, 
-      status, applicant, apply_time, 
-      approver, approve_time, executor, 
-      execute_time, timestamp)
-    values (#{assetId,jdbcType=VARCHAR}, #{assetName,jdbcType=VARCHAR}, #{number,jdbcType=BIGINT}, 
-      #{status,jdbcType=BIGINT}, #{applicant,jdbcType=VARCHAR}, #{applyTime,jdbcType=VARCHAR}, 
-      #{approver,jdbcType=VARCHAR}, #{approveTime,jdbcType=VARCHAR}, #{executor,jdbcType=VARCHAR}, 
-      #{executeTime,jdbcType=VARCHAR}, #{timestamp,jdbcType=TIMESTAMP})
+    insert into scrap_apply (asset_id, asset_name, manufacturer, 
+      number, status, applicant, 
+      apply_time, approver, approve_time, 
+      executor, execute_time, timestamp
+      )
+    values (#{assetId,jdbcType=VARCHAR}, #{assetName,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, 
+      #{number,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{applicant,jdbcType=VARCHAR}, 
+      #{applyTime,jdbcType=TIMESTAMP}, #{approver,jdbcType=VARCHAR}, #{approveTime,jdbcType=TIMESTAMP}, 
+      #{executor,jdbcType=VARCHAR}, #{executeTime,jdbcType=TIMESTAMP}, #{timestamp,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.hch.model.entity.ScrapApply">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into scrap_apply
@@ -53,6 +56,9 @@
       </if>
       <if test="assetName != null">
         asset_name,
+      </if>
+      <if test="manufacturer != null">
+        manufacturer,
       </if>
       <if test="number != null">
         number,
@@ -89,29 +95,32 @@
       <if test="assetName != null">
         #{assetName,jdbcType=VARCHAR},
       </if>
+      <if test="manufacturer != null">
+        #{manufacturer,jdbcType=VARCHAR},
+      </if>
       <if test="number != null">
-        #{number,jdbcType=BIGINT},
+        #{number,jdbcType=INTEGER},
       </if>
       <if test="status != null">
-        #{status,jdbcType=BIGINT},
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="applicant != null">
         #{applicant,jdbcType=VARCHAR},
       </if>
       <if test="applyTime != null">
-        #{applyTime,jdbcType=VARCHAR},
+        #{applyTime,jdbcType=TIMESTAMP},
       </if>
       <if test="approver != null">
         #{approver,jdbcType=VARCHAR},
       </if>
       <if test="approveTime != null">
-        #{approveTime,jdbcType=VARCHAR},
+        #{approveTime,jdbcType=TIMESTAMP},
       </if>
       <if test="executor != null">
         #{executor,jdbcType=VARCHAR},
       </if>
       <if test="executeTime != null">
-        #{executeTime,jdbcType=VARCHAR},
+        #{executeTime,jdbcType=TIMESTAMP},
       </if>
       <if test="timestamp != null">
         #{timestamp,jdbcType=TIMESTAMP},
@@ -127,49 +136,53 @@
       <if test="assetName != null">
         asset_name = #{assetName,jdbcType=VARCHAR},
       </if>
+      <if test="manufacturer != null">
+        manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      </if>
       <if test="number != null">
-        number = #{number,jdbcType=BIGINT},
+        number = #{number,jdbcType=INTEGER},
       </if>
       <if test="status != null">
-        status = #{status,jdbcType=BIGINT},
+        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="applicant != null">
         applicant = #{applicant,jdbcType=VARCHAR},
       </if>
       <if test="applyTime != null">
-        apply_time = #{applyTime,jdbcType=VARCHAR},
+        apply_time = #{applyTime,jdbcType=TIMESTAMP},
       </if>
       <if test="approver != null">
         approver = #{approver,jdbcType=VARCHAR},
       </if>
       <if test="approveTime != null">
-        approve_time = #{approveTime,jdbcType=VARCHAR},
+        approve_time = #{approveTime,jdbcType=TIMESTAMP},
       </if>
       <if test="executor != null">
         executor = #{executor,jdbcType=VARCHAR},
       </if>
       <if test="executeTime != null">
-        execute_time = #{executeTime,jdbcType=VARCHAR},
+        execute_time = #{executeTime,jdbcType=TIMESTAMP},
       </if>
       <if test="timestamp != null">
         timestamp = #{timestamp,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hch.model.entity.ScrapApply">
     update scrap_apply
     set asset_id = #{assetId,jdbcType=VARCHAR},
       asset_name = #{assetName,jdbcType=VARCHAR},
-      number = #{number,jdbcType=BIGINT},
-      status = #{status,jdbcType=BIGINT},
+      manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
       applicant = #{applicant,jdbcType=VARCHAR},
-      apply_time = #{applyTime,jdbcType=VARCHAR},
+      apply_time = #{applyTime,jdbcType=TIMESTAMP},
       approver = #{approver,jdbcType=VARCHAR},
-      approve_time = #{approveTime,jdbcType=VARCHAR},
+      approve_time = #{approveTime,jdbcType=TIMESTAMP},
       executor = #{executor,jdbcType=VARCHAR},
-      execute_time = #{executeTime,jdbcType=VARCHAR},
+      execute_time = #{executeTime,jdbcType=TIMESTAMP},
       timestamp = #{timestamp,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

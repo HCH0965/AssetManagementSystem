@@ -3,13 +3,13 @@ package com.hch.mapper;
 import com.hch.model.entity.Asset;
 
 public interface AssetMapper {
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Asset record);
 
     int insertSelective(Asset record);
 
-    Asset selectByPrimaryKey(Long id);
+    Asset selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(Asset record);
 

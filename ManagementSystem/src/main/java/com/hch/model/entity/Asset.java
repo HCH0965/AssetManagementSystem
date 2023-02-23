@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @ApiModel(value = "asset")
@@ -34,7 +35,14 @@ public class Asset implements Serializable {
     private String assetName;
 
     /**
-     * 资产状态（0:未使用 1:在使用 2:已报废）
+     * 厂商
+     */
+    @TableField(value = "manufacturer")
+    @ApiModelProperty(value = "厂商")
+    private String manufacturer;
+
+    /**
+     * 资产状态（0:未使用 1:在使用 2:已报废 3:未通过审核）
      */
     @TableField(value = "state")
     @ApiModelProperty(value = "资产状态")
@@ -74,5 +82,5 @@ public class Asset implements Serializable {
     @TableField(value = "purchase_time",fill = FieldFill.INSERT)
     @ApiModelProperty(value = "时间戳")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    private String timestamp;
+    private Date timestamp;
 }

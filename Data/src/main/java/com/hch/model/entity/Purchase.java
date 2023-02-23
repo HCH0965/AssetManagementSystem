@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Purchase implements Serializable {
-    private Long id;
+    private Integer id;
 
     private String assetId;
 
@@ -12,33 +12,35 @@ public class Purchase implements Serializable {
 
     private String price;
 
-    private Long number;
+    private Integer number;
 
     private String totalprice;
 
+    private String manufacturer;
+
     private String applicant;
 
-    private String applyTime;
+    private Date applyTime;
 
-    private Long state;
+    private Integer state;
 
     private String department;
 
     private String consenter;
 
-    private String agreedTime;
+    private Date agreedTime;
 
-    private String purchaseTime;
+    private Date purchaseTime;
 
     private Date timestamp;
 
     private static final long serialVersionUID = 1L;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -66,11 +68,11 @@ public class Purchase implements Serializable {
         this.price = price;
     }
 
-    public Long getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(Long number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
@@ -82,6 +84,14 @@ public class Purchase implements Serializable {
         this.totalprice = totalprice;
     }
 
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
     public String getApplicant() {
         return applicant;
     }
@@ -90,19 +100,19 @@ public class Purchase implements Serializable {
         this.applicant = applicant;
     }
 
-    public String getApplyTime() {
+    public Date getApplyTime() {
         return applyTime;
     }
 
-    public void setApplyTime(String applyTime) {
+    public void setApplyTime(Date applyTime) {
         this.applyTime = applyTime;
     }
 
-    public Long getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(Long state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 
@@ -122,19 +132,19 @@ public class Purchase implements Serializable {
         this.consenter = consenter;
     }
 
-    public String getAgreedTime() {
+    public Date getAgreedTime() {
         return agreedTime;
     }
 
-    public void setAgreedTime(String agreedTime) {
+    public void setAgreedTime(Date agreedTime) {
         this.agreedTime = agreedTime;
     }
 
-    public String getPurchaseTime() {
+    public Date getPurchaseTime() {
         return purchaseTime;
     }
 
-    public void setPurchaseTime(String purchaseTime) {
+    public void setPurchaseTime(Date purchaseTime) {
         this.purchaseTime = purchaseTime;
     }
 
@@ -158,6 +168,7 @@ public class Purchase implements Serializable {
         sb.append(", price=").append(price);
         sb.append(", number=").append(number);
         sb.append(", totalprice=").append(totalprice);
+        sb.append(", manufacturer=").append(manufacturer);
         sb.append(", applicant=").append(applicant);
         sb.append(", applyTime=").append(applyTime);
         sb.append(", state=").append(state);

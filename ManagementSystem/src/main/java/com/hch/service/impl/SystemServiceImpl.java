@@ -7,8 +7,11 @@ import com.hch.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @Service
 public class SystemServiceImpl implements SystemService {
@@ -20,14 +23,15 @@ public class SystemServiceImpl implements SystemService {
      * @return 当前时间
      */
     @Override
-    public String nowTime() {
-        LocalDateTime dateTime = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        return dateTime.format(formatter);
+    public Date nowTime() throws ParseException {
+        Date dateTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String str = formatter.format(dateTime);
+        return formatter.parse(str);
     }
 
     /**
-     * 查询申请权限
+     * 验证申请权限
      * @param userId 用户ID
      * @return 用户信息
      */
@@ -42,7 +46,7 @@ public class SystemServiceImpl implements SystemService {
     }
 
     /**
-     * 查询审核权限
+     * 验证审核权限
      * @param userId 用户ID
      * @return 用户信息
      */

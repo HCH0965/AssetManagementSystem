@@ -4,17 +4,19 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Asset implements Serializable {
-    private Long id;
+    private Integer id;
 
     private String assetId;
 
     private String assetName;
 
-    private Long state;
+    private String manufacturer;
+
+    private Integer state;
 
     private String price;
 
-    private Long number;
+    private Integer number;
 
     private String totalprice;
 
@@ -24,11 +26,11 @@ public class Asset implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -48,11 +50,19 @@ public class Asset implements Serializable {
         this.assetName = assetName;
     }
 
-    public Long getState() {
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public Integer getState() {
         return state;
     }
 
-    public void setState(Long state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 
@@ -64,11 +74,11 @@ public class Asset implements Serializable {
         this.price = price;
     }
 
-    public Long getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(Long number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
@@ -105,6 +115,7 @@ public class Asset implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", assetId=").append(assetId);
         sb.append(", assetName=").append(assetName);
+        sb.append(", manufacturer=").append(manufacturer);
         sb.append(", state=").append(state);
         sb.append(", price=").append(price);
         sb.append(", number=").append(number);

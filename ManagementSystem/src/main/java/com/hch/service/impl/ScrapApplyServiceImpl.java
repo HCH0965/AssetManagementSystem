@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+
 @Service
 public class ScrapApplyServiceImpl extends ServiceImpl<ScrapApplyMapper, ScrapApply> implements ScrapApplyService {
     @Autowired
@@ -36,7 +38,7 @@ public class ScrapApplyServiceImpl extends ServiceImpl<ScrapApplyMapper, ScrapAp
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public R<?> scrapApply(ApplyDTO applyDTO) {
+    public R<?> scrapApply(ApplyDTO applyDTO) throws ParseException {
         if (applyDTO != null) {
             //查询资产是否为使用中
             Use use = useService.lambdaQuery()
@@ -65,7 +67,7 @@ public class ScrapApplyServiceImpl extends ServiceImpl<ScrapApplyMapper, ScrapAp
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public R<?> scrapApprove(ApproveDTO approveDTO) {
+    public R<?> scrapApprove(ApproveDTO approveDTO) throws ParseException {
         if (approveDTO != null) {
             //验证审核权限
             User user = systemService.getApproveUser(approveDTO.getUserId());

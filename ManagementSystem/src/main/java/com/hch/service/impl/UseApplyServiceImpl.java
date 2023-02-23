@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+
 @Service
 public class UseApplyServiceImpl extends ServiceImpl<UseApplyMapper, UseApply> implements UseApplyService {
     @Autowired
@@ -36,7 +38,7 @@ public class UseApplyServiceImpl extends ServiceImpl<UseApplyMapper, UseApply> i
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public R<?> useApply(ApplyDTO applyDTO) {
+    public R<?> useApply(ApplyDTO applyDTO) throws ParseException {
         if (applyDTO != null) {
             //验证资产是否存在且未使用
             Asset asset = assetService.lambdaQuery()
@@ -65,7 +67,7 @@ public class UseApplyServiceImpl extends ServiceImpl<UseApplyMapper, UseApply> i
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public R<?> useApprove(ApproveDTO approveDTO) {
+    public R<?> useApprove(ApproveDTO approveDTO) throws ParseException {
         if (approveDTO != null) {
             //验证审核权限
             User user = systemService.getApproveUser(approveDTO.getUserId());
@@ -76,7 +78,7 @@ public class UseApplyServiceImpl extends ServiceImpl<UseApplyMapper, UseApply> i
                     .one();
             if ((user != null) && (useApply != null)) {
                 //设置审核时间
-                useApply.setApprover(systemService.nowTime());
+                useApply.setApplyTime(systemService.nowTime());
                 if (approveDTO.getIsApprove() == MyEnum.APPROVE_PASS_YES.getCode()) {
                     //审核通过，申请状态改为已通过
                     useApply.setStatus(MyEnum.APPLY_STATUS_PASS.getCode());

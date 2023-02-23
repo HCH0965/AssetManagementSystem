@@ -19,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class PurchaseApplyServiceImpl extends ServiceImpl<PurchaseApplyMapper, PurchaseApply> implements PurchaseApplyService {
@@ -41,7 +43,7 @@ public class PurchaseApplyServiceImpl extends ServiceImpl<PurchaseApplyMapper, P
      * @return 返回结果
      */
     @Override
-    public R<?> purchaseApply(ApplyDTO applyDTO) {
+    public R<?> purchaseApply(ApplyDTO applyDTO) throws ParseException {
         if (applyDTO != null) {
             PurchaseApply purchaseApply = new PurchaseApply();
             BeanUtils.copyProperties(applyDTO, purchaseApply);
@@ -83,7 +85,7 @@ public class PurchaseApplyServiceImpl extends ServiceImpl<PurchaseApplyMapper, P
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public R<?> purchaseApprove(ApproveDTO approveDTO) {
+    public R<?> purchaseApprove(ApproveDTO approveDTO) throws ParseException {
         if (approveDTO != null) {
             //验证审核权限
             User user = systemService.getApproveUser(approveDTO.getUserId());
@@ -94,7 +96,7 @@ public class PurchaseApplyServiceImpl extends ServiceImpl<PurchaseApplyMapper, P
                     .one();
             if ((user != null) && (purchaseApply != null)) {
                 //设置审核时间
-                purchaseApply.setApprover(systemService.nowTime());
+                purchaseApply.setApproveTime(systemService.nowTime());
                 if (approveDTO.getIsApprove() == MyEnum.APPROVE_PASS_YES.getCode()) {
                     //审核通过，申请状态改为已通过
                     purchaseApply.setStatus(MyEnum.APPLY_STATUS_PASS.getCode());

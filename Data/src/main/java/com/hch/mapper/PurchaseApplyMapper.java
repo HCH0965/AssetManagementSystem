@@ -3,13 +3,13 @@ package com.hch.mapper;
 import com.hch.model.entity.PurchaseApply;
 
 public interface PurchaseApplyMapper {
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(PurchaseApply record);
 
     int insertSelective(PurchaseApply record);
 
-    PurchaseApply selectByPrimaryKey(Long id);
+    PurchaseApply selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(PurchaseApply record);
 

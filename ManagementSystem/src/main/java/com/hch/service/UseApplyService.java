@@ -6,18 +6,20 @@ import com.hch.model.dto.ApplyDTO;
 import com.hch.model.dto.ApproveDTO;
 import com.hch.model.entity.UseApply;
 
+import java.text.ParseException;
+
 public interface UseApplyService extends IService<UseApply> {
     /**
      * 使用申请
      * @param applyDTO 使用参数
      * @return 返回结果
      */
-    R<?> useApply(ApplyDTO applyDTO);
+    R<?> useApply(ApplyDTO applyDTO) throws ParseException;
 
     /**
      * 使用审核
      * @param approveDTO 使用参数
      * @return 返回结果
      */
-    R<?> useApprove(ApproveDTO approveDTO);
+    R<?> useApprove(ApproveDTO approveDTO) throws ParseException;
 }

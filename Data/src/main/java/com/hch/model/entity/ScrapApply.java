@@ -4,37 +4,39 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class ScrapApply implements Serializable {
-    private Long id;
+    private Integer id;
 
     private String assetId;
 
     private String assetName;
 
-    private Long number;
+    private String manufacturer;
 
-    private Long status;
+    private Integer number;
+
+    private Integer status;
 
     private String applicant;
 
-    private String applyTime;
+    private Date applyTime;
 
     private String approver;
 
-    private String approveTime;
+    private Date approveTime;
 
     private String executor;
 
-    private String executeTime;
+    private Date executeTime;
 
     private Date timestamp;
 
     private static final long serialVersionUID = 1L;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -54,19 +56,27 @@ public class ScrapApply implements Serializable {
         this.assetName = assetName;
     }
 
-    public Long getNumber() {
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(Long number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
-    public Long getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Long status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -78,11 +88,11 @@ public class ScrapApply implements Serializable {
         this.applicant = applicant;
     }
 
-    public String getApplyTime() {
+    public Date getApplyTime() {
         return applyTime;
     }
 
-    public void setApplyTime(String applyTime) {
+    public void setApplyTime(Date applyTime) {
         this.applyTime = applyTime;
     }
 
@@ -94,11 +104,11 @@ public class ScrapApply implements Serializable {
         this.approver = approver;
     }
 
-    public String getApproveTime() {
+    public Date getApproveTime() {
         return approveTime;
     }
 
-    public void setApproveTime(String approveTime) {
+    public void setApproveTime(Date approveTime) {
         this.approveTime = approveTime;
     }
 
@@ -110,11 +120,11 @@ public class ScrapApply implements Serializable {
         this.executor = executor;
     }
 
-    public String getExecuteTime() {
+    public Date getExecuteTime() {
         return executeTime;
     }
 
-    public void setExecuteTime(String executeTime) {
+    public void setExecuteTime(Date executeTime) {
         this.executeTime = executeTime;
     }
 
@@ -135,6 +145,7 @@ public class ScrapApply implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", assetId=").append(assetId);
         sb.append(", assetName=").append(assetName);
+        sb.append(", manufacturer=").append(manufacturer);
         sb.append(", number=").append(number);
         sb.append(", status=").append(status);
         sb.append(", applicant=").append(applicant);
